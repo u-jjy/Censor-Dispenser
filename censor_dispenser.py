@@ -32,3 +32,16 @@ def censor_bad(text, lst, negatives):
 
 #print(censor_bad(email_three, proprietary_terms, negative_words))
 
+def censor_all(text, lst, negatives):
+    text = censor_bad(text, lst, negatives)
+    text_split = text.split()
+    for word in text_split:
+        if word.count("⬛") >= 1:
+            index = text_split.index(word)
+            word_back = text_split[index - 1]
+            word_front = text_split[index + 1]
+            text_split[index - 1] = "⬛" * len(word_back)
+            text_split[index + 1] = "⬛" * len(word_front)
+    return " ".join(text_split)
+
+#print(censor_all(email_three, proprietary_terms, negative_words))
