@@ -17,3 +17,18 @@ def censor_list(text, lst):
     return(text)
 
 #print(censor_list(email_two, proprietary_terms))
+
+negative_words = ["concerned", "behind", "danger", "dangerous", "alarming", "alarmed", "out of control", "help", "unhappy", "bad", "upset", "awful", "broken", "damage", "damaging", "dismal", "distressed", "distressed", "concerning", "horrible", "horribly", "questionable"]
+
+def censor_bad(text, lst, negatives):
+    count = 0
+    text = censor_list(text, lst)
+    for word in negatives:
+        if text.count(word) >= 1:
+            count += 1
+        if count > 2:
+            text = text.replace(word, "⬛" * len(word))
+    return text
+
+#print(censor_bad(email_three, proprietary_terms, negative_words))
+
